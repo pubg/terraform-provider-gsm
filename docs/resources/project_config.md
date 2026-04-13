@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 resource "gsm_project_config" "test_config" {
-  project_id  = "<project_id>"
+  project_id  = "d290f1ee-6c54-4b01-90e6-d701748f0851"
   config_name = "test-config"
 
   config = {
@@ -29,10 +29,21 @@ resource "gsm_project_config" "test_config" {
 
 ### Required
 
-- `config` (Map of String) Configuration key-value pairs
+- `config` (Map of String) Config key-value properties
 - `config_name` (String) Name of the config
 - `project_id` (String) Project ID where the config belongs
+
+### Optional
+
+- `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--timeouts"></a>
+### Nested Schema for `timeouts`
+
+Optional:
+
+- `default` (String)

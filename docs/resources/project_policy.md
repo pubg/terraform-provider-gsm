@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 resource "gsm_project_policy" "test_policy" {
-  project_id  = "<project_id>"
+  project_id  = "d290f1ee-6c54-4b01-90e6-d701748f0851"
   policy_name = "test-policy"
 
   subjects = ["urn:gsm::iam/user:<user_uuid>", "urn:gsm::iam/group:<group_uuid>"]

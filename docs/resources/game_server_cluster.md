@@ -48,6 +48,18 @@ resource "gsm_game_server_cluster" "test_cluster" {
 - `cluster_name` (String) cluster_name is the name of the cluster. must be globally unique
 - `kube_issuer` (String) kube_issuer is the issuer of the kube cluster.
 
+### Optional
+
+- `annotations` (Map of String) Annotations for the game server cluster
+- `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
+
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--timeouts"></a>
+### Nested Schema for `timeouts`
+
+Optional:
+
+- `default` (String)

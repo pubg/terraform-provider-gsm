@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 resource "gsm_project_image_repository_credentials" "test_credentials" {
-  project_id             = "<project_id>"
+  project_id             = "d290f1ee-6c54-4b01-90e6-d701748f0851"
   repository_url_pattern = "docker.io"
 
   auth {
@@ -37,9 +37,9 @@ resource "gsm_project_image_repository_credentials" "test_credentials" {
 
 ### Required
 
-- `auth` (Block List, Min: 1) Authentication methods for the repository (see [below for nested schema](#nestedblock--auth))
-- `project_id` (String) Project ID where the image repository credentials belong
-- `repository_url_pattern` (String) Repository URL pattern for the credentials
+- `auth` (Block List, Min: 1) Authentication configuration (token or aws_ecr, mutually exclusive) (see [below for nested schema](#nestedblock--auth))
+- `project_id` (String) Project ID where the credentials belong
+- `repository_url_pattern` (String) Image repository URL pattern (glob format)
 
 ### Optional
 
@@ -54,21 +54,18 @@ resource "gsm_project_image_repository_credentials" "test_credentials" {
 
 Optional:
 
-- `aws_ecr` (Block Set, Max: 1) AWS ECR authentication, only one of token or aws_ecr can be set. if both defined, token will be used. (see [below for nested schema](#nestedblock--auth--aws_ecr))
-- `token` (String) Secret Reference of token (format: !ref:<secret_name>:<key_name>), only one of token or aws_ecr can be set. if both defined, token will be used.
+- `aws_ecr` (Block List, Max: 1) AWS ECR authentication (see [below for nested schema](#nestedblock--auth--aws_ecr))
+- `token` (String, Sensitive) Static token auth (contextual ref format: !ref:secret:<name>:<key>)
 
 <a id="nestedblock--auth--aws_ecr"></a>
 ### Nested Schema for `auth.aws_ecr`
 
 Required:
 
-- `aws_region` (String) AWS region
-
-Optional:
-
-- `aws_access_key_id` (String) Secret Reference of AWS access key ID (format: !ref:<secret_name>:<key_name>)
-- `aws_role_arn` (String) AWS role ARN
-- `aws_secret_access_key` (String) Secret Reference of AWS secret access key (format: !ref:<secret_name>:<key_name>)
+- `aws_access_key_id` (String, Sensitive)
+- `aws_region` (String)
+- `aws_role_arn` (String)
+- `aws_secret_access_key` (String, Sensitive)
 
 
 

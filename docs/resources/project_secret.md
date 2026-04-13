@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 resource "gsm_project_secret" "test_secret" {
-  project_id = "<project_id>"
+  project_id = "d290f1ee-6c54-4b01-90e6-d701748f0851"
   name       = "test-secret"
 
   secret = {
