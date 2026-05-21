@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 resource "gsm_squadron_template" "example" {
-  project_id  = "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  project_id  = "<project_id>"
   name        = "game-server-template"
   description = "Squadron template for game servers"
 

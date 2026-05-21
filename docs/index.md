@@ -29,4 +29,4 @@ resource "gsm_project" "test_project" {
 
 - `address` (String)
 - `timeout_seconds` (Number) Timeout in seconds for the provider to connect to the GSM server
-- `token` (String, Sensitive)
+- `token` (String)

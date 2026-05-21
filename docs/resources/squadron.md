@@ -15,7 +15,7 @@ description: |-
 ```terraform
 # Create a squadron template first
 resource "gsm_squadron_template" "game_server" {
-  project_id  = "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  project_id  = "<project_id>"
   name        = "game-server-template"
   description = "Squadron template for game servers"
 
@@ -218,7 +218,7 @@ EOT
 
 # Create a squadron using the template
 resource "gsm_squadron" "example" {
-  environment_id = "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+  environment_id = "<environment_id>"
   template_id    = gsm_squadron_template.game_server.template_id
   name           = "game-server-squadron"
   description    = "Game server squadron for production"
@@ -242,13 +242,11 @@ resource "gsm_squadron" "example" {
 ### Optional
 
 - `description` (String) Description of the squadron
-- `ignore_value_keys` (Set of String) List of value keys to ignore during plan diff (e.g. keys changed by autoscaler)
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `values` (String) JSON values used for rendering the squadron template
 
 ### Read-Only
 
-- `allocation_labels` (Map of String) Allocation labels managed by the server (read-only)
 - `id` (String) The ID of this resource.
 - `squadron_id` (String) Squadron ID
 

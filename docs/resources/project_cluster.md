@@ -58,26 +58,17 @@ resource "gsm_project_cluster" "example" {
 
 ### Required
 
-- `cluster_name` (String) Name of the cluster (must match a registered GameServerCluster)
-- `project_id` (String) Project ID where the cluster belongs
+- `cluster_name` (String) Name of the game server cluster to register
+- `project_id` (String) Project ID where the cluster will be registered
 
 ### Optional
 
-- `annotations` (Map of String) Annotations for the cluster in this project
-- `labels` (Map of String) Labels for the cluster in this project
-- `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
+- `annotations` (Map of String) Annotations for the cluster
+- `labels` (Map of String) Labels for the cluster
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-
-<a id="nestedblock--timeouts"></a>
-### Nested Schema for `timeouts`
-
-Optional:
-
-- `default` (String)
-
 
 
 

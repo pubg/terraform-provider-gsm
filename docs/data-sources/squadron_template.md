@@ -15,7 +15,7 @@ description: |-
 ```terraform
 # Lookup by template ID
 data "gsm_squadron_template" "by_id" {
-  template_id = "b1ffc3c8-2e07-4db4-9a84-6ee732d6c0d1"
+  template_id = "<template_id>"
 }
 
 # Lookup by name (gets latest version)

@@ -19,7 +19,7 @@ Use this data source to retrieve project information. You can look up a project 
 ```terraform
 # Lookup project by ID
 data "gsm_project" "by_id" {
-  project_id = "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  project_id = "proj-123456"
 }
 
 # Lookup project by name

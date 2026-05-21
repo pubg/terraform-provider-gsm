@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 data "gsm_squadron" "example" {
-  squadron_id = "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+  squadron_id = "<squadron_id>"
 }
 
 output "squadron_name" {
