@@ -14,8 +14,9 @@ description: |-
 
 ```terraform
 resource "gsm_game_server_cluster" "test_cluster" {
-  cluster_name = "test-cluster"
-  kube_issuer  = "https://kubernetes.default.svc.cluster.local"
+  cluster_name  = "test-cluster"
+  kube_issuer   = "https://kubernetes.default.svc.cluster.local"
+  kube_audience = "gsm-apiserver"
 
   agones_endpoint         = "https://agones-allocator.example.com:443"
   agones_mtls_private_key = "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
@@ -51,7 +52,16 @@ resource "gsm_game_server_cluster" "test_cluster" {
 ### Optional
 
 - `annotations` (Map of String) Annotations for the game server cluster
+- `kube_audience` (String) kube_audience is the value that must be in the `aud` claim of tokens issued by kube_issuer. if empty, `aud` is not checked.
+- `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--timeouts"></a>
+### Nested Schema for `timeouts`
+
+Optional:
+
+- `default` (String)

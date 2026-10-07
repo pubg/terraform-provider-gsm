@@ -1,2 +1,2 @@
 ## Changelog   
-* 1b59c8bd22e280a2af0d86935796d6bffa40996b fix: [PDO-290] restore project_cluster and environment_config resources (!12)
+* a567083371a17d5b64a658e245264d805eef3958 fix: [PDO-0] buf code 생성에 BSR remote plugin 대신 local plugin 사용 (!24)

@@ -23,6 +23,10 @@ output "cluster_kube_issuer" {
   value = data.gsm_game_server_cluster.example.kube_issuer
 }
 
+output "cluster_kube_audience" {
+  value = data.gsm_game_server_cluster.example.kube_audience
+}
+
 output "cluster_agones_endpoint" {
   value = data.gsm_game_server_cluster.example.agones_endpoint
 }
@@ -47,6 +51,7 @@ output "cluster_agones_endpoint" {
 - `annotations` (Map of String) Annotations for the game server cluster
 - `argocd_endpoint` (String) ArgoCD endpoint
 - `id` (String) The ID of this resource.
+- `kube_audience` (String) Value that must be in the `aud` claim of tokens issued by kube_issuer. empty if `aud` is not checked
 - `kube_issuer` (String) Kube issuer of the cluster
 
 <a id="nestedblock--timeouts"></a>
