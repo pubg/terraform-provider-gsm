@@ -44,16 +44,17 @@ resource "gsm_environment_cluster_allocation_group" "example" {
 
 - `cluster_allocation_group_name` (String) Name of the cluster allocation group
 - `environment_id` (String) Environment ID where the cluster allocation group belongs
-- `targets` (Block List, Min: 1) Cluster allocation targets configuration (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
 - `description` (String) Description of the cluster allocation group
 - `labels` (Map of String) Labels for cluster selection in allocation requests
+- `targets` (Block List) Cluster allocation targets configuration (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
 
+- `annotations` (Map of String) Annotations of the cluster allocation group (read-only: the v1alpha1 API has no metadata update for cluster allocation groups)
 - `id` (String) The ID of this resource.
 
 <a id="nestedblock--targets"></a>

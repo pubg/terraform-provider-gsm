@@ -1,2 +1,2 @@
 ## Changelog   
-* a567083371a17d5b64a658e245264d805eef3958 fix: [PDO-0] buf code 생성에 BSR remote plugin 대신 local plugin 사용 (!24)
+* 4a20cb8620e2555335be20a126e717003429cb89 fix: 게시된 v0.1.0 의 수정을 복원하고 squadron description 이 반영되게 한다 (!19)

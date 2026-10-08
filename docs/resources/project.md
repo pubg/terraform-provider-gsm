@@ -27,12 +27,13 @@ resource "gsm_project" "test_project" {
 
 ### Optional
 
+- `annotations` (Map of String) Annotations for the project (arbitrary key-value metadata)
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `project_id` (String) Project ID where the secret belongs
+- `project_id` (String) Project ID
 
 <a id="nestedblock--timeouts"></a>
 ### Nested Schema for `timeouts`
@@ -40,3 +41,4 @@ resource "gsm_project" "test_project" {
 Optional:
 
 - `default` (String)
+- `delete` (String)

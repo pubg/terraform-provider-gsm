@@ -30,6 +30,7 @@ resource "gsm_environment" "example" {
 
 ### Optional
 
+- `annotations` (Map of String) Annotations for the environment (arbitrary key-value metadata)
 - `description` (String) Description of the environment
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
@@ -44,3 +45,4 @@ resource "gsm_environment" "example" {
 Optional:
 
 - `default` (String)
+- `delete` (String)

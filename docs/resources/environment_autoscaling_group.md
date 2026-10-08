@@ -38,15 +38,16 @@ resource "gsm_environment_autoscaling_group" "example" {
 
 - `autoscaling_group_name` (String) Name of the autoscaling group
 - `environment_id` (String) Environment ID where the autoscaling group belongs
-- `targets` (Block List, Min: 1) Autoscaling targets configuration (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
 - `description` (String) Description of the autoscaling group
+- `targets` (Block List) Autoscaling targets configuration (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
 
+- `annotations` (Map of String) Annotations of the autoscaling group (read-only: the v1alpha1 API has no metadata update for autoscaling groups)
 - `id` (String) The ID of this resource.
 
 <a id="nestedblock--targets"></a>

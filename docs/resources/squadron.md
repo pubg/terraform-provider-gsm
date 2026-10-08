@@ -242,11 +242,13 @@ resource "gsm_squadron" "example" {
 ### Optional
 
 - `description` (String) Description of the squadron
+- `ignore_value_keys` (Set of String) List of value keys to ignore during plan diff (e.g. keys changed by autoscaler)
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `values` (String) JSON values used for rendering the squadron template
 
 ### Read-Only
 
+- `allocation_labels` (Map of String) Allocation labels managed by the server (read-only)
 - `id` (String) The ID of this resource.
 - `squadron_id` (String) Squadron ID
 
