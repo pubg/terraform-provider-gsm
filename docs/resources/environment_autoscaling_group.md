@@ -41,7 +41,7 @@ resource "gsm_environment_autoscaling_group" "example" {
 
 ### Optional
 
-- `description` (String) Description of the autoscaling group
+- `description` (String) Description of the autoscaling group. GSM server does not store it, so the value is kept only in the Terraform state.
 - `targets` (Block List) Autoscaling targets configuration (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

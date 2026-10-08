@@ -47,7 +47,7 @@ resource "gsm_environment_cluster_allocation_group" "example" {
 
 ### Optional
 
-- `description` (String) Description of the cluster allocation group
+- `description` (String) Description of the cluster allocation group. GSM server does not store it, so the value is kept only in the Terraform state.
 - `labels` (Map of String) Labels for cluster selection in allocation requests
 - `targets` (Block List) Cluster allocation targets configuration (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))

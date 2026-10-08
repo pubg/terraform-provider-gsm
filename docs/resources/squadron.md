@@ -258,3 +258,4 @@ resource "gsm_squadron" "example" {
 Optional:
 
 - `default` (String)
+- `delete` (String)

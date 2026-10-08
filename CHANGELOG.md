@@ -1,2 +1,2 @@
 ## Changelog   
-* 4a20cb8620e2555335be20a126e717003429cb89 fix: 게시된 v0.1.0 의 수정을 복원하고 squadron description 이 반영되게 한다 (!19)
+* 56ab9812d5184eba231f78344268f3df7f76f039 feat: [PDO-0] 미구현된 리소스 API 에 대한 resource, data 추가 (!25)

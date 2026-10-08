@@ -6,6 +6,8 @@ description: |-
   
 ---
 
+~> **Deprecated** GSM server no longer implements the v1alpha1 image repository credentials API, so this resource always fails. Use [`gsm_image_registry_credential`](./image_registry_credential.md) instead.
+
 # gsm_project_image_repository_credentials (Resource)
 
 

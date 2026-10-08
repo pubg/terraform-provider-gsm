@@ -14,7 +14,13 @@ description: |-
 
 ```terraform
 resource "gsm_project" "test_project" {
-  name = "test-project"
+  name        = "test-project"
+  description = "Project for the test game"
+
+  # Replaces every annotation on the project, including ones set outside Terraform. Removing the argument clears them.
+  annotations = {
+    "example.com/owner" = "devops"
+  }
 }
 ```
 
@@ -27,7 +33,8 @@ resource "gsm_project" "test_project" {
 
 ### Optional
 
-- `annotations` (Map of String) Annotations for the project (arbitrary key-value metadata)
+- `annotations` (Map of String) Annotations for the project (arbitrary key-value metadata). They replace every annotation on the project, so removing the argument clears them.
+- `description` (String) Description is the description of the project. When omitted, the existing description is left as it is.
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only

@@ -3,12 +3,12 @@
 page_title: "gsm_squadron_template Resource - terraform-provider-gsm"
 subcategory: ""
 description: |-
-  
+  Manages a squadron template and tracks its latest released version. Changing gotpl or variables_json_schema releases a new version and keeps the previous ones, so squadrons pinned to them keep working. A version released outside Terraform becomes the tracked version on the next refresh. Drafts are not supported.
 ---
 
 # gsm_squadron_template (Resource)
 
-
+Manages a squadron template and tracks its latest released version. Changing `gotpl` or `variables_json_schema` releases a new version and keeps the previous ones, so squadrons pinned to them keep working. A version released outside Terraform becomes the tracked version on the next refresh. Drafts are not supported.
 
 ## Example Usage
 
@@ -222,7 +222,7 @@ EOT
 
 ### Required
 
-- `gotpl` (String) Go template content for rendering squadrons
+- `gotpl` (String) Go template content for rendering squadrons. Changing it releases a new version.
 - `name` (String) Name of the template
 - `project_id` (String) Project ID where the template belongs
 
@@ -230,14 +230,14 @@ EOT
 
 - `description` (String) Description of the template
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
-- `variables_json_schema` (String) JSON schema for template variables validation
+- `variables_json_schema` (String) JSON schema for template variables validation. Changing it releases a new version.
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
-- `template_id` (String) Squadron template ID (version-specific)
+- `template_id` (String) ID of the latest released version. Squadrons reference it as `template_id`.
 - `template_metadata_id` (String) Squadron template metadata ID (stable identifier)
-- `version` (Number) Template version number
+- `version` (Number) Number of the latest released version
 
 <a id="nestedblock--timeouts"></a>
 ### Nested Schema for `timeouts`
