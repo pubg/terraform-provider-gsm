@@ -33,6 +33,7 @@ data "gsm_project_autoscaling_group" "default" {
 
 ### Read-Only
 
+- `description` (String) Description of the autoscaling group
 - `id` (String) The ID of this resource.
 - `targets` (List of Object) Clusters that game servers of this group are scaled onto (see [below for nested schema](#nestedatt--targets))
 

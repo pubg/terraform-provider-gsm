@@ -16,6 +16,7 @@ Manages a cluster allocation group owned by a project. Squadrons in every enviro
 resource "gsm_project_cluster_allocation_group" "default" {
   project_id                    = "<project_id>"
   cluster_allocation_group_name = "kr-default"
+  description                   = "Default cluster allocation group for Korea"
 
   labels = {
     region = "asia"
@@ -39,6 +40,7 @@ resource "gsm_project_cluster_allocation_group" "default" {
 
 ### Optional
 
+- `description` (String) Description of the cluster allocation group
 - `labels` (Map of String) Labels used to select this group during allocation
 - `targets` (Block List) Clusters that game servers are allocated from (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))

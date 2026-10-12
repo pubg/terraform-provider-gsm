@@ -16,6 +16,7 @@ Manages an autoscaling group owned by a project. Squadrons in every environment 
 resource "gsm_project_autoscaling_group" "default" {
   project_id             = "<project_id>"
   autoscaling_group_name = "docs-asg"
+  description            = "Autoscaling group for the docs example"
 
   targets {
     cluster_name = "<cluster_name>"
@@ -35,6 +36,7 @@ resource "gsm_project_autoscaling_group" "default" {
 
 ### Optional
 
+- `description` (String) Description of the autoscaling group
 - `targets` (Block List) Clusters that game servers of this group are scaled onto (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

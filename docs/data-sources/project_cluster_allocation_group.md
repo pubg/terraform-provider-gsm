@@ -33,6 +33,7 @@ data "gsm_project_cluster_allocation_group" "default" {
 
 ### Read-Only
 
+- `description` (String) Description of the cluster allocation group
 - `id` (String) The ID of this resource.
 - `labels` (Map of String) Labels used to select this group during allocation
 - `targets` (List of Object) Clusters that game servers are allocated from (see [below for nested schema](#nestedatt--targets))
