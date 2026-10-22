@@ -54,6 +54,7 @@ resource "gsm_environment_cluster_allocation_group" "example" {
 
 ### Read-Only
 
+- `allocation_destination_name` (String) Name to use in AllocationProfile destinations. It equals cluster_allocation_group_name but stays unknown until the group is created, so a profile that references a group created in the same apply skips the plan-time preview and is validated by the server at apply
 - `annotations` (Map of String) Annotations of the cluster allocation group (read-only: the v1alpha1 API has no metadata update for cluster allocation groups)
 - `id` (String) The ID of this resource.
 

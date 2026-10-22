@@ -1,5 +1,3 @@
 ## Changelog   
-* e8c5a1482f0ae1cb1fde4877e255a4c7e050caf5 fix: [PDO-0] 없는 리소스 import 오류와 datadog_agent·node_metric sink read 누락 수정 (!34)   
-* b29fbc148e48f10251ed321addebd540fe407f16 ci: migrate default branch references from main to master [skip ci]   
-* f3b2aaf8e2cc972102765da2ab3bf2f61770e9b9 ci: raise Kubernetes pod CPU request to 4 and limit to 12 (!33)   
-* 95e42e8c78359760f503a030095cd09da9e4eed4 ci: configure generous Kubernetes pod CPU and memory limits (!31)
+* 85550a7565889e505409c2f53495621cfa460bd9 feat: [PDO-467] AllocationProfile·Binding 리소스와 Revision data source 추가 (!32)   
+* b087e647a6225e83c9ee88aca600296043e54e83 docs: [PDO-0] 코드와 어긋난 provider docs 를 다시 생성하고 go:generate 에 provider 이름 지정 (!36)

@@ -29,10 +29,21 @@ resource "gsm_project_config" "test_config" {
 
 ### Required
 
-- `config` (Map of String) Configuration key-value pairs
+- `config` (Map of String) Config key-value properties
 - `config_name` (String) Name of the config
 - `project_id` (String) Project ID where the config belongs
+
+### Optional
+
+- `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedblock--timeouts"></a>
+### Nested Schema for `timeouts`
+
+Optional:
+
+- `default` (String)

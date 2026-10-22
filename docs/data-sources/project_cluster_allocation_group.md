@@ -33,6 +33,7 @@ data "gsm_project_cluster_allocation_group" "default" {
 
 ### Read-Only
 
+- `allocation_destination_name` (String) Name to use in AllocationProfile destinations. It equals cluster_allocation_group_name
 - `description` (String) Description of the cluster allocation group
 - `id` (String) The ID of this resource.
 - `labels` (Map of String) Labels used to select this group during allocation
