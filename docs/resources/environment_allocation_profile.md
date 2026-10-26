@@ -1,28 +1,28 @@
 ---
-page_title: "Resource gsm_allocation_profile - terraform-provider-gsm"
+page_title: "Resource gsm_environment_allocation_profile - terraform-provider-gsm"
 subcategory: ""
 description: |-
-  Manages an AllocationProfile and its immutable revision sequence.
+  Manages a Environment AllocationProfile and its immutable revision sequence.
 ---
 
-# gsm_allocation_profile (Resource)
+# gsm_environment_allocation_profile (Resource)
 
-Manages a Project- or Environment-owned AllocationProfile. Changing `routes` or `default_route` creates the next immutable revision instead of modifying the current revision. The plan shows the number of that revision in `latest_revision`, so a Binding that references it shows the revision it will activate. While a route value is unknown during plan, the number stays unknown because the spec may turn out unchanged.
+Manages an AllocationProfile owned by an Environment. An Environment Binding activates its revisions for that Environment; use `gsm_project_allocation_profile` for a Profile shared through the Project Binding. Changing `routes` or `default_route` creates the next immutable revision instead of modifying the current revision. The plan shows the number of that revision in `latest_revision`, so a Binding that references it shows the revision it will activate. While a route value is unknown during plan, the number stays unknown because the spec may turn out unchanged.
 
 The Provider previews the desired spec when a plan creates the Profile or changes `routes` or `default_route`. Validation errors fail the plan, while non-blocking warnings are exposed through `validation_warnings`. A plan without spec changes does not validate the stored revision again. The preview is skipped while any value is unknown; the server then validates the revision during apply.
 
-Reference a destination with the `allocation_destination_name` attribute of `gsm_environment_cluster_allocation_group` or `gsm_project_cluster_allocation_group`, not with `cluster_allocation_group_name`. The attribute stays unknown until the group is created, so a plan that creates the group and the Profile together skips the preview instead of failing on a group that does not exist yet. The reference also makes Terraform create the group before the revision, which the server requires.
+Reference a destination with the `allocation_destination_name` attribute of `gsm_environment_cluster_allocation_group` or `gsm_project_cluster_allocation_group`, not with `cluster_allocation_group_name`. An Environment Profile can reference the ClusterAllocationGroups of its Environment and of its Project. The attribute stays unknown until the group is created, so a plan that creates the group and the Profile together skips the preview instead of failing on a group that does not exist yet. The reference also makes Terraform create the group before the revision, which the server requires.
 
 -> **Route fields:** `routes` is a list of objects so that a plan shows an inserted or removed route alone, and it is still written as `routes { }` blocks. The generated schema below therefore lists every nested `routes` field as optional without a description. Each route requires `name` and at least one `destinations` block, and each destination requires `name`; the provider rejects a route without them. See the `routes` description for each field.
 
 ~> **Destroy behavior:** The current GSM API does not delete AllocationProfiles or Revisions. Terraform destroy removes only this resource from state; the remote Profile and its revision history remain. Creating a Profile with the same name afterwards fails because the Profile still exists; import it instead. Use `lifecycle.prevent_destroy` when an accidental state-only removal would be unsafe.
 
-~> **Owner identifiers:** `project` and `environment` accept a name or an ID, but Terraform compares the values as written. Use the same form in the configuration and in the import ID, and do not switch between a name and an ID later. A different form plans a replacement even for the same owner, and because destroy removes the Profile only from state, the following create fails with `AlreadyExists`.
+~> **Owner identifiers:** `project` and `environment` accept a name or an ID, but Terraform compares the values as written. Use the same form in the configuration and in the import ID, and do not switch between a name and an ID later. A different form plans a replacement even for the same Environment, and because destroy removes the Profile only from state, the following create fails with `AlreadyExists`.
 
 ## Example Usage
 
 ```terraform
-resource "gsm_allocation_profile" "production" {
+resource "gsm_environment_allocation_profile" "production" {
   project      = gsm_project.example.name
   environment  = gsm_environment.production.name
   profile_name = "default"
@@ -41,8 +41,9 @@ resource "gsm_allocation_profile" "production" {
   default_route {
     name = "default"
 
+    # An Environment profile can also reference Project ClusterAllocationGroups.
     destinations {
-      name = gsm_environment_cluster_allocation_group.default.allocation_destination_name
+      name = gsm_project_cluster_allocation_group.default.allocation_destination_name
     }
   }
 }
@@ -54,12 +55,12 @@ resource "gsm_allocation_profile" "production" {
 ### Required
 
 - `default_route` (Block List, Min: 1, Max: 1) Route used when no conditional route matches. Its attributes are not evaluated (see [below for nested schema](#nestedblock--default_route))
+- `environment` (String) Environment name or ID that owns the AllocationProfile
 - `profile_name` (String) AllocationProfile name, unique within its owner
 - `project` (String) Project name or ID that owns the AllocationProfile
 
 ### Optional
 
-- `environment` (String) Environment name or ID that owns the AllocationProfile. Omit for a project AllocationProfile
 - `revision_reason` (String) Audit reason stored with each new revision
 - `routes` (List of Object) Ordered conditional allocation routes. The first matching route is used. Each route has a required `name`, unique within the revision; optional `attributes`, request attributes that must all match, where empty attributes match every request; and at least one ordered `destinations` block, where allocation stops at the first destination that succeeds. Each destination has a required `name`, the ClusterAllocationGroup name, and an optional `type`, which defaults to cluster_allocation_group, the only supported type (see [below for nested schema](#nestedatt--routes))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
@@ -135,8 +136,8 @@ Optional:
 
 ## Import
 
-Import a Project Profile with `gsm_allocation_profile/<project>/<profile>` or an Environment Profile with `gsm_allocation_profile/<project>/<environment>/<profile>`:
+Import a Profile with `gsm_environment_allocation_profile/<project>/<environment>/<profile_name>`:
 
 ```shell
-terraform import gsm_allocation_profile.example gsm_allocation_profile/my-project/production/default
+terraform import gsm_environment_allocation_profile.example gsm_environment_allocation_profile/my-project/production/default
 ```

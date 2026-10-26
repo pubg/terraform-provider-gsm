@@ -1,26 +1,26 @@
 ---
-page_title: "Data Source gsm_allocation_profile_revision - terraform-provider-gsm"
+page_title: "Data Source gsm_environment_allocation_profile_revision - terraform-provider-gsm"
 subcategory: ""
 description: |-
-  Reads one immutable AllocationProfile revision.
+  Reads one immutable Environment AllocationProfile revision.
 ---
 
-# gsm_allocation_profile_revision (Data Source)
+# gsm_environment_allocation_profile_revision (Data Source)
 
-Reads an exact immutable AllocationProfile revision by owner, Profile name, and revision number.
+Reads an exact immutable revision of a Environment AllocationProfile by owner, Profile name, and revision number. Use `gsm_project_allocation_profile_revision` for a Project AllocationProfile.
 
 ## Example Usage
 
 ```terraform
-data "gsm_allocation_profile_revision" "production" {
+data "gsm_environment_allocation_profile_revision" "production" {
   project      = gsm_project.example.name
   environment  = gsm_environment.production.name
-  profile_name = gsm_allocation_profile.production.profile_name
+  profile_name = gsm_environment_allocation_profile.production.profile_name
   revision     = 1
 }
 
-output "allocation_profile_revision_id" {
-  value = data.gsm_allocation_profile_revision.production.revision_id
+output "environment_allocation_profile_revision_id" {
+  value = data.gsm_environment_allocation_profile_revision.production.revision_id
 }
 ```
 
@@ -29,13 +29,13 @@ output "allocation_profile_revision_id" {
 
 ### Required
 
+- `environment` (String) Environment name or ID that owns the AllocationProfile
 - `profile_name` (String) AllocationProfile name
 - `project` (String) Project name or ID that owns the AllocationProfile
 - `revision` (Number) Revision number to read
 
 ### Optional
 
-- `environment` (String) Environment name or ID that owns the AllocationProfile. Omit for a project AllocationProfile
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only
