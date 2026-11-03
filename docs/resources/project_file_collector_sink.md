@@ -18,15 +18,17 @@ resource "gsm_project_file_collector_sink" "logs" {
   file_collector_sink_name = "logs-s3"
 
   s3 {
-    bucket         = "docs-game-logs"
-    region         = "ap-northeast-2"
-    s3_path_prefix = "games/"
+    bucket = "docs-game-logs"
+    region = "ap-northeast-2"
     # The role must trust the GSM workload OIDC issuer for subject gsm:workload/filecollector:<project>:logs-s3
     aws_role_arn = "arn:aws:iam::123456789012:role/docs-file-collector"
 
     object_tags = {
       environment = "production"
     }
+
+    # Omit to use the default layout <cluster>/dt=YYYY-MM-DD/hour=HH/<path_prefix>/<namespace>/<pod>/<file>
+    key_template = "games/{{.Cluster}}/dt={{.StartedAt.Format \"2006-01-02\"}}/{{.Namespace}}/{{.Pod}}/{{.File}}"
   }
 }
 ```
@@ -60,8 +62,8 @@ Required:
 
 Optional:
 
+- `key_template` (String) Go template that renders the S3 object key of each uploaded file. Empty uses the default layout `<cluster>/dt=YYYY-MM-DD/hour=HH/<path_prefix>/<namespace>/<pod>/<file>`. Available values: `.Cluster`, `.StartedAt`, `.TargetPrefix`, `.Namespace`, `.Pod`, `.File`. It must reference `.Namespace`, `.Pod` and `.File` so that objects are not overwritten. The GSM API validates the template.
 - `object_tags` (Map of String) Tags attached to every uploaded object
-- `s3_path_prefix` (String) Key prefix prepended to every uploaded object
 
 
 <a id="nestedblock--timeouts"></a>

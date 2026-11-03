@@ -52,6 +52,6 @@ Read-Only:
 
 - `aws_role_arn` (String)
 - `bucket` (String)
+- `key_template` (String)
 - `object_tags` (Map of String)
 - `region` (String)
-- `s3_path_prefix` (String)
