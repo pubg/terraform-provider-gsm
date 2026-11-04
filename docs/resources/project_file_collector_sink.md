@@ -27,7 +27,7 @@ resource "gsm_project_file_collector_sink" "logs" {
       environment = "production"
     }
 
-    # Omit to use the default layout <cluster>/dt=YYYY-MM-DD/hour=HH/<path_prefix>/<namespace>/<pod>/<file>
+    # Omit to use the default layout <path_prefix>/dt=YYYY-MM-DD/hour=HH/<cluster>/<namespace>/<pod>/<file>
     key_template = "games/{{.Cluster}}/dt={{.StartedAt.Format \"2006-01-02\"}}/{{.Namespace}}/{{.Pod}}/{{.File}}"
   }
 }
@@ -62,7 +62,7 @@ Required:
 
 Optional:
 
-- `key_template` (String) Go template that renders the S3 object key of each uploaded file. Empty uses the default layout `<cluster>/dt=YYYY-MM-DD/hour=HH/<path_prefix>/<namespace>/<pod>/<file>`. Available values: `.Cluster`, `.StartedAt`, `.TargetPrefix`, `.Namespace`, `.Pod`, `.File`. It must reference `.Namespace`, `.Pod` and `.File` so that objects are not overwritten. The GSM API validates the template.
+- `key_template` (String) Go template that renders the S3 object key of each uploaded file. Empty uses the default layout `<path_prefix>/dt=YYYY-MM-DD/hour=HH/<cluster>/<namespace>/<pod>/<file>`. Available values: `.Cluster`, `.StartedAt`, `.TargetPrefix`, `.Namespace`, `.Pod`, `.File`. It must reference `.Namespace`, `.Pod` and `.File` so that objects are not overwritten. The GSM API validates the template.
 - `object_tags` (Map of String) Tags attached to every uploaded object
 
 
