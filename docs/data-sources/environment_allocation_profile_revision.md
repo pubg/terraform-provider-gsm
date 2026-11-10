@@ -7,16 +7,15 @@ description: |-
 
 # gsm_environment_allocation_profile_revision (Data Source)
 
-Reads an exact immutable revision of a Environment AllocationProfile by owner, Profile name, and revision number. Use `gsm_project_allocation_profile_revision` for a Project AllocationProfile.
+Reads an exact immutable revision of an Environment AllocationProfile by owner and revision number. Use `gsm_project_allocation_profile_revision` for a Project AllocationProfile.
 
 ## Example Usage
 
 ```terraform
 data "gsm_environment_allocation_profile_revision" "production" {
-  project      = gsm_project.example.name
-  environment  = gsm_environment.production.name
-  profile_name = gsm_environment_allocation_profile.production.profile_name
-  revision     = 1
+  project     = gsm_project.example.name
+  environment = gsm_environment.production.name
+  revision    = 1
 }
 
 output "environment_allocation_profile_revision_id" {
@@ -30,7 +29,6 @@ output "environment_allocation_profile_revision_id" {
 ### Required
 
 - `environment` (String) Environment name or ID that owns the AllocationProfile
-- `profile_name` (String) AllocationProfile name
 - `project` (String) Project name or ID that owns the AllocationProfile
 - `revision` (Number) Revision number to read
 

@@ -7,7 +7,7 @@ description: |-
 
 # gsm_project_allocation_profile_binding (Resource)
 
-Manages the Project Binding, the fallback that activates Project AllocationProfile revisions for every Environment without a Binding of its own. A Binding contains one or two revision targets; two targets use their relative `weight` values for traffic distribution. Targets reference `gsm_project_allocation_profile` Profiles of the same Project.
+Manages the Project Binding, the fallback that activates Project AllocationProfile revisions for every Environment without a Binding of its own. A Binding contains one or two revision targets; two targets use their relative `weight` values for traffic distribution. Targets reference revisions of the `gsm_project_allocation_profile` of the same Project.
 
 ~> **Lifecycle:** Destroying this resource deletes the Project Binding from GSM. Environments without their own Binding then fail to allocate until a new Project Binding is created. A Binding removed outside Terraform is planned for recreation.
 
@@ -21,7 +21,6 @@ resource "gsm_project_allocation_profile_binding" "default" {
   reason  = "activate the project fallback"
 
   targets {
-    profile  = gsm_project_allocation_profile.default.profile_name
     revision = gsm_project_allocation_profile.default.latest_revision
     weight   = 100
   }
@@ -36,7 +35,7 @@ Weights are relative, so `9/1` and `90/10` express the same distribution. Change
 ### Required
 
 - `project` (String) Project name or ID that owns the Binding
-- `targets` (Block List, Min: 1) One or two revisions of AllocationProfiles owned by the same owner, selected by relative weight (see [below for nested schema](#nestedblock--targets))
+- `targets` (Block List, Min: 1) One or two revisions of the AllocationProfile owned by the same owner, selected by relative weight (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
@@ -59,7 +58,6 @@ Weights are relative, so `9/1` and `90/10` express the same distribution. Change
 
 Required:
 
-- `profile` (String) AllocationProfile name
 - `revision` (Number) AllocationProfile revision number
 - `weight` (Number) Relative weight. Weights do not need to add up to 100
 

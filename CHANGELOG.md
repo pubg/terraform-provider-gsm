@@ -1,2 +1,2 @@
 ## Changelog   
-* acba54ed59a44fefdcaa344710e4673718f57348 fix: [PDO-1265] key_template 설명의 기본 구조를 실제 순서로 고친다 (!40)
+* 55159d792a991799864b49be73c6c882f283b3bd feat: [PDO-1317] AllocationProfile 을 owner 당 하나로 보고 profile 이름을 provider 에서 지운다

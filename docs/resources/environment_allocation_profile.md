@@ -2,12 +2,12 @@
 page_title: "Resource gsm_environment_allocation_profile - terraform-provider-gsm"
 subcategory: ""
 description: |-
-  Manages a Environment AllocationProfile and its immutable revision sequence.
+  Manages an Environment AllocationProfile and its immutable revision sequence.
 ---
 
 # gsm_environment_allocation_profile (Resource)
 
-Manages an AllocationProfile owned by an Environment. An Environment Binding activates its revisions for that Environment; use `gsm_project_allocation_profile` for a Profile shared through the Project Binding. Changing `routes` or `default_route` creates the next immutable revision instead of modifying the current revision. The plan shows the number of that revision in `latest_revision`, so a Binding that references it shows the revision it will activate. While a route value is unknown during plan, the number stays unknown because the spec may turn out unchanged.
+Manages the AllocationProfile of an Environment. An Environment has at most one AllocationProfile, and GSM names it, so the owner identifies the Profile. An Environment Binding activates its revisions for that Environment; use `gsm_project_allocation_profile` for a Profile shared through the Project Binding. Changing `routes` or `default_route` creates the next immutable revision instead of modifying the current revision. The plan shows the number of that revision in `latest_revision`, so a Binding that references it shows the revision it will activate. While a route value is unknown during plan, the number stays unknown because the spec may turn out unchanged.
 
 The Provider previews the desired spec when a plan creates the Profile or changes `routes` or `default_route`. Validation errors fail the plan, while non-blocking warnings are exposed through `validation_warnings`. A plan without spec changes does not validate the stored revision again. The preview is skipped while any value is unknown; the server then validates the revision during apply.
 
@@ -15,17 +15,16 @@ Reference a destination with the `allocation_destination_name` attribute of `gsm
 
 -> **Route fields:** `routes` is a list of objects so that a plan shows an inserted or removed route alone, and it is still written as `routes { }` blocks. The generated schema below therefore lists every nested `routes` field as optional without a description. Each route requires `name` and at least one `destinations` block, and each destination requires `name`; the provider rejects a route without them. See the `routes` description for each field.
 
-~> **Destroy behavior:** The current GSM API does not delete AllocationProfiles or Revisions. Terraform destroy removes only this resource from state; the remote Profile and its revision history remain. Creating a Profile with the same name afterwards fails because the Profile still exists; import it instead. Use `lifecycle.prevent_destroy` when an accidental state-only removal would be unsafe.
+~> **Destroy behavior:** Destroying this resource deletes the Profile and all of its revisions from GSM. Creating it again starts a new Profile from revision 1. If the Environment has a different Profile than the one in Terraform state, for example one recreated outside Terraform, destroy leaves it in GSM and only removes it from state. GSM rejects the deletion while the Environment has a Binding, so delete the Binding first. A `gsm_environment_allocation_profile_binding` that references `latest_revision` is destroyed before the Profile. Use `lifecycle.prevent_destroy` to keep the revision history from an accidental destroy.
 
-~> **Owner identifiers:** `project` and `environment` accept a name or an ID, but Terraform compares the values as written. Use the same form in the configuration and in the import ID, and do not switch between a name and an ID later. A different form plans a replacement even for the same Environment, and because destroy removes the Profile only from state, the following create fails with `AlreadyExists`.
+~> **Owner identifiers:** `project` and `environment` accept a name or an ID, but Terraform compares the values as written. Use the same form in the configuration and in the import ID, and do not switch between a name and an ID later. A different form plans a replacement even for the same Environment, which deletes the Profile with its revision history and creates it again from revision 1.
 
 ## Example Usage
 
 ```terraform
 resource "gsm_environment_allocation_profile" "production" {
-  project      = gsm_project.example.name
-  environment  = gsm_environment.production.name
-  profile_name = "default"
+  project     = gsm_project.example.name
+  environment = gsm_environment.production.name
 
   routes {
     name = "ranked"
@@ -56,7 +55,6 @@ resource "gsm_environment_allocation_profile" "production" {
 
 - `default_route` (Block List, Min: 1, Max: 1) Route used when no conditional route matches. Its attributes are not evaluated (see [below for nested schema](#nestedblock--default_route))
 - `environment` (String) Environment name or ID that owns the AllocationProfile
-- `profile_name` (String) AllocationProfile name, unique within its owner
 - `project` (String) Project name or ID that owns the AllocationProfile
 
 ### Optional
@@ -136,8 +134,8 @@ Optional:
 
 ## Import
 
-Import a Profile with `gsm_environment_allocation_profile/<project>/<environment>/<profile_name>`:
+Import a Profile with `gsm_environment_allocation_profile/<project>/<environment>`:
 
 ```shell
-terraform import gsm_environment_allocation_profile.example gsm_environment_allocation_profile/my-project/production/default
+terraform import gsm_environment_allocation_profile.example gsm_environment_allocation_profile/my-project/production
 ```

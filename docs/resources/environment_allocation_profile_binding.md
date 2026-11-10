@@ -7,7 +7,7 @@ description: |-
 
 # gsm_environment_allocation_profile_binding (Resource)
 
-Manages the Binding of one Environment, which overrides the Project Binding. A Binding contains one or two revision targets; two targets use their relative `weight` values for traffic distribution. Targets reference `gsm_environment_allocation_profile` Profiles of the same Environment.
+Manages the Binding of one Environment, which overrides the Project Binding. A Binding contains one or two revision targets; two targets use their relative `weight` values for traffic distribution. Targets reference revisions of the `gsm_environment_allocation_profile` of the same Environment.
 
 ~> **Lifecycle:** Destroying this resource deletes the Environment Binding from GSM, so the Environment returns to the Project Binding. Without a Project Binding the Environment then fails to allocate, so keep a `gsm_project_allocation_profile_binding` unless the Environment should stop allocating. A Binding removed outside Terraform is planned for recreation.
 
@@ -23,13 +23,11 @@ resource "gsm_environment_allocation_profile_binding" "production" {
 
   # Keep a fixed revision while the managed profile advances to a candidate.
   targets {
-    profile  = gsm_environment_allocation_profile.production.profile_name
     revision = 1
     weight   = 90
   }
 
   targets {
-    profile  = gsm_environment_allocation_profile.production.profile_name
     revision = gsm_environment_allocation_profile.production.latest_revision
     weight   = 10
   }
@@ -50,7 +48,7 @@ Weights are relative, so `9/1` and `90/10` express the same distribution. Change
 
 - `environment` (String) Environment name or ID that owns the Binding
 - `project` (String) Project name or ID that owns the Binding
-- `targets` (Block List, Min: 1) One or two revisions of AllocationProfiles owned by the same owner, selected by relative weight (see [below for nested schema](#nestedblock--targets))
+- `targets` (Block List, Min: 1) One or two revisions of the AllocationProfile owned by the same owner, selected by relative weight (see [below for nested schema](#nestedblock--targets))
 
 ### Optional
 
@@ -73,7 +71,6 @@ Weights are relative, so `9/1` and `90/10` express the same distribution. Change
 
 Required:
 
-- `profile` (String) AllocationProfile name
 - `revision` (Number) AllocationProfile revision number
 - `weight` (Number) Relative weight. Weights do not need to add up to 100
 
