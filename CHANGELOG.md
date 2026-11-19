@@ -1,2 +1,2 @@
 ## Changelog   
-* 55159d792a991799864b49be73c6c882f283b3bd feat: [PDO-1317] AllocationProfile 을 owner 당 하나로 보고 profile 이름을 provider 에서 지운다
+* a408c897b4deeddb29a19f74e9fd9e59179ddcda feat: [PDO-0] provider 설정 하나로 여러 GSM 에 접근하는 profile 추가 (!42)

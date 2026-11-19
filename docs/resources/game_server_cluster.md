@@ -53,6 +53,7 @@ resource "gsm_game_server_cluster" "test_cluster" {
 
 - `annotations` (Map of String) Annotations for the game server cluster
 - `kube_audience` (String) kube_audience is the value that must be in the `aud` claim of tokens issued by kube_issuer. if empty, `aud` is not checked.
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
 ### Read-Only

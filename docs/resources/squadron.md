@@ -243,6 +243,7 @@ resource "gsm_squadron" "example" {
 
 - `description` (String) Description of the squadron
 - `ignore_value_keys` (Set of String) List of value keys to ignore during plan diff (e.g. keys changed by autoscaler)
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `values` (String) JSON values used for rendering the squadron template
 

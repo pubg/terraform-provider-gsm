@@ -42,6 +42,7 @@ resource "gsm_environment_autoscaling_group" "example" {
 ### Optional
 
 - `description` (String) Description of the autoscaling group
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `targets` (Block List) Autoscaling targets configuration (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

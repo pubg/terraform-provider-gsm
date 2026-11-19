@@ -43,6 +43,7 @@ output "project_name" {
 ### Optional
 
 - `name` (String) Project name to lookup
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `project_id` (String) Project ID to lookup
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

@@ -52,6 +52,7 @@ Weights are relative, so `9/1` and `90/10` express the same distribution. Change
 
 ### Optional
 
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `reason` (String) Audit reason stored with each Binding change
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

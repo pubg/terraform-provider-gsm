@@ -41,6 +41,7 @@ output "environment_description" {
 
 - `environment_id` (String) Environment ID to lookup
 - `name` (String) Environment name to lookup. Requires project_id to be set.
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `project_id` (String) Project ID where the environment belongs. Required when using name lookup.
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

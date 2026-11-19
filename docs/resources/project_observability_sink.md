@@ -75,6 +75,7 @@ resource "gsm_project_observability_sink" "metrics" {
 - `log` (Block List, Max: 1) Sends container logs (see [below for nested schema](#nestedblock--log))
 - `metric` (Block List, Max: 1) Sends game server metrics (see [below for nested schema](#nestedblock--metric))
 - `node_metric` (Block List, Max: 1) Sends node metrics (see [below for nested schema](#nestedblock--node_metric))
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `trace` (Block List, Max: 1) Sends traces (see [below for nested schema](#nestedblock--trace))
 

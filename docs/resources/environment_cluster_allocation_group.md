@@ -49,6 +49,7 @@ resource "gsm_environment_cluster_allocation_group" "example" {
 
 - `description` (String) Description of the cluster allocation group
 - `labels` (Map of String) Labels for cluster selection in allocation requests
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `targets` (Block List) Cluster allocation targets configuration (see [below for nested schema](#nestedblock--targets))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 

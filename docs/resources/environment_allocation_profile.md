@@ -59,6 +59,7 @@ resource "gsm_environment_allocation_profile" "production" {
 
 ### Optional
 
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `revision_reason` (String) Audit reason stored with each new revision
 - `routes` (List of Object) Ordered conditional allocation routes. The first matching route is used. Each route has a required `name`, unique within the revision; optional `attributes`, request attributes that must all match, where empty attributes match every request; and at least one ordered `destinations` block, where allocation stops at the first destination that succeeds. Each destination has a required `name`, the ClusterAllocationGroup name, and an optional `type`, which defaults to cluster_allocation_group, the only supported type (see [below for nested schema](#nestedatt--routes))
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))

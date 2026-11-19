@@ -48,6 +48,7 @@ output "template_version" {
 ### Optional
 
 - `name` (String) Template name to lookup (requires version or uses latest)
+- `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
 - `template_id` (String) Squadron template ID to lookup
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `version` (Number) Template version to lookup (requires name)
