@@ -47,6 +47,7 @@ output "environment_description" {
 
 ### Read-Only
 
+- `annotations` (Map of String) Annotations of the environment
 - `description` (String) Description of the environment
 - `id` (String) The ID of this resource.
 

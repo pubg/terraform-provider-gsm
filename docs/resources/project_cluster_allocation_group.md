@@ -48,7 +48,7 @@ resource "gsm_project_cluster_allocation_group" "default" {
 
 ### Read-Only
 
-- `allocation_destination_name` (String) Name to use in AllocationProfile destinations. It equals cluster_allocation_group_name but stays unknown until the group is created, so a profile that references a group created in the same apply skips the plan-time preview and is validated by the server at apply
+- `allocation_destination_name` (String) Name to use in AllocationProfile destinations. It equals cluster_allocation_group_name. Referencing it makes Terraform create the group before the profile, and lets the plan-time preview of the profile accept a group that the same apply creates. It stays unknown until the group is created when the plan cannot read the owner of the group, and a profile that references it then skips the preview
 - `id` (String) The ID of this resource.
 
 <a id="nestedblock--targets"></a>
