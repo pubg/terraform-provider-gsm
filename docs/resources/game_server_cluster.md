@@ -18,10 +18,13 @@ resource "gsm_game_server_cluster" "test_cluster" {
   kube_issuer   = "https://kubernetes.default.svc.cluster.local"
   kube_audience = "gsm-apiserver"
 
-  agones_endpoint         = "https://agones-allocator.example.com:443"
-  agones_mtls_private_key = "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
-  agones_mtls_cert        = "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
-  agones_mtls_ca_cert     = "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+  agones_endpoint = "https://agones-allocator.example.com:443"
+  # Optional host:port where the GSM allocator calls agones-allocator directly with a ServiceAccount token.
+  # Omit or set to "" to clear the address.
+  agones_allocator_endpoint = "agones-allocator.example.com:443"
+  agones_mtls_private_key   = "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+  agones_mtls_cert          = "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+  agones_mtls_ca_cert       = "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
 
   argocd_endpoint  = "argocd.example.com"
   argocd_jwt_token = "...jwt-token..."
@@ -51,6 +54,7 @@ resource "gsm_game_server_cluster" "test_cluster" {
 
 ### Optional
 
+- `agones_allocator_endpoint` (String) The `host:port` address where the GSM allocator calls this cluster's agones-allocator directly with a ServiceAccount token. Do not include a URL scheme; for example, `agones-allocator.example.com:443`. This is separate from `agones_endpoint`, which uses mTLS client certificates. Omit or set to an empty string to clear the address.
 - `annotations` (Map of String) Annotations for the game server cluster
 - `kube_audience` (String) kube_audience is the value that must be in the `aud` claim of tokens issued by kube_issuer. if empty, `aud` is not checked.
 - `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
