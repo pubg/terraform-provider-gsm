@@ -1,2 +1,2 @@
 ## Changelog   
-* 217d4f51e30f0bd88c01655d7d54926ade4bf29a feat: [PDO-1420] gsm_game_server_cluster 에 agones_allocator_endpoint 속성을 추가한다 (!45)
+* 70e40870641bf9f0c35ab1d036d18078c8f5a746 feat: [PDO-1360] gsm_squadron_template data source 가 project 와 이름으로 템플릿을 찾는다 (!46)

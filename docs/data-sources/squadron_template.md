@@ -20,13 +20,15 @@ data "gsm_squadron_template" "by_id" {
 
 # Lookup by name (gets latest version)
 data "gsm_squadron_template" "by_name" {
-  name = "game-server-template"
+  project_id = "<project_id>"
+  name       = "game-server-template"
 }
 
 # Lookup by name and specific version
 data "gsm_squadron_template" "by_name_version" {
-  name    = "game-server-template"
-  version = 2
+  project_id = "<project_id>"
+  name       = "game-server-template"
+  version    = 2
 }
 
 output "template_id" {
@@ -47,8 +49,9 @@ output "template_version" {
 
 ### Optional
 
-- `name` (String) Template name to lookup (requires version or uses latest)
+- `name` (String) Template name to lookup in the project (requires project_id, uses the latest released version unless version is set)
 - `profile` (String) Name of a profile block of the provider configuration. Required when the provider configuration has more than one profile block. With one profile block, that profile is used when this is not set
+- `project_id` (String) Project ID where the template belongs (required with name)
 - `template_id` (String) Squadron template ID to lookup
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `version` (Number) Template version to lookup (requires name)
@@ -58,7 +61,6 @@ output "template_version" {
 - `description` (String) Description of the template
 - `gotpl` (String) Go template content for rendering squadrons
 - `id` (String) The ID of this resource.
-- `project_id` (String) Project ID where the template belongs
 - `template_metadata_id` (String) Squadron template metadata ID
 - `variables_json_schema` (String) JSON schema for template variables validation
 
